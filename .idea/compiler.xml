@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <option name="defaultObfuscationEnv" value="named:intermediary" />
+        <option name="inMapFileNamedIntermediary" value="$USER_HOME$/.gradle/caches/essential-loom/1.12.2/de.oceanlabs.mcp.mcp_snapshot.1_12_2.20170615-1.12-forge-1.12.2-14.23.0.2486/mappings-mixin-srg.tiny" />
+        <option name="outMapFileNamedIntermediary" value="$PROJECT_DIR$/versions/1.12.2/build/loom-cache/mixin-map-de.oceanlabs.mcp.mcp_snapshot.1_12_2.20170615-1.12-forge-1.12.2-14.23.0.2486.1.tiny" />
+        <option name="outRefMapFile" value="$PROJECT_DIR$/versions/1.12.2/build/classes/java/main/wynnfeatures.mixins.refmap.json" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/gg.essential.lib/mixinextras/0.0.6/6b0c43c22b6b02e336e90aab9591b990e33ff687/mixinextras-0.0.6.jar" />
+        </processorPath>
+        <module name="WynnFeatures.1.12.2.main" />
+      </profile>
+    </annotationProcessing>
     <bytecodeTargetLevel target="1.8" />
   </component>
 </project>

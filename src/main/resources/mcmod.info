@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "wynnfeatures",
+    "name": "WynnFeatures",
+    "description": "Funny Wynncraft Mod",
+    "version": "${version}",
+    "mcversion": "1.12.2",
+    "updateUrl": "",
+    "authorList": [
+      "ForBai"
+    ],
+    "credits": "prplz, 2pi, UserTeemu, DJtheRedstoner, SporkSpoon, Sk1er LLC, RoseGold, MrFast",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "me.anemoi.wynnfeatures.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "wynnfeatures.mixins.refmap.json",
+  "client": [
+    "MixinMinecraft"
+  ],
+  "minVersion": "0.8"
+}
