@@ -9,9 +9,12 @@ import me.anemoi.wynnfeatures.extras.api.ExtraBlock;
 import me.anemoi.wynnfeatures.extras.api.ExtraStuff;
 import me.anemoi.wynnfeatures.extras.api.ExtraWaypoint;
 import me.anemoi.wynnfeatures.utils.Utils;
+import net.minecraft.util.math.BlockPos;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExtrasConfig {
 
@@ -70,6 +73,9 @@ public class ExtrasConfig {
         Extras.addWaypoint(new ExtraWaypoint("test", 0, 0, 0).withColor(new Color(255, 255, 255)).withVisibleDistance(10));
         Extras.addStuff(new ExtraStuff("say hi", 0.1, 0.1, 0.1).withColor(new Color(255, 255, 0, 200)).withRange(2.4f).withOnShift(true).withVisibleDistance(10));
         saveConfigs();
+        Extras.clearAll();
+        loadConfigs();
+        Extras.blocks.forEach((k, v) -> System.out.println(k + " || " + v));
     }
 
     public static void saveConfigs() {
@@ -126,10 +132,16 @@ public class ExtrasConfig {
         blocks.entrySet().forEach(entry -> {
             String blockName = entry.getKey();
             JsonArray blockPos = entry.getValue().getAsJsonArray();
+            List<BlockPos> blockPosList = new ArrayList<>();
             blockPos.forEach(pos -> {
                 String[] posArray = pos.getAsString().split(", ");
-                Extras.addBlock(new ExtraBlock(blockName, Integer.parseInt(posArray[0]), Integer.parseInt(posArray[1]), Integer.parseInt(posArray[2])));
+                blockPosList.add(new BlockPos(Integer.parseInt(posArray[0]), Integer.parseInt(posArray[1]), Integer.parseInt(posArray[2])));
             });
+            Extras.blocks.put(blockName, blockPosList);
+//            blockPos.forEach(pos -> {
+//                String[] posArray = pos.getAsString().split(", ");
+//                Extras.addBlock(new ExtraBlock(blockName, Integer.parseInt(posArray[0]), Integer.parseInt(posArray[1]), Integer.parseInt(posArray[2])));
+//            });
         });
 
         waypoints.entrySet().forEach(entry -> {
