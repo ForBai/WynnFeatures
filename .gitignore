@@ -36,7 +36,9 @@ out
 *.ipr
 *.iws
 *.iml
+.idea/**
 .idea
+.vscode/**
 .vscode
 
 # gradle
