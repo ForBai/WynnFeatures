@@ -38,6 +38,7 @@ out
 *.iml
 .idea
 **/config/
+.vscode
 
 # gradle
 .gradle
