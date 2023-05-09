@@ -40,8 +40,8 @@ out
 **/config/
 
 # gradle
-build
 .gradle
+build/
 
 # other
 eclipse
