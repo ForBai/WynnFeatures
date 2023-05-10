@@ -85,7 +85,7 @@ public class Extras {
                         RenderUtils.drawBlockOutline(new BlockPos(point.getPos().x, point.getPos().y, point.getPos().z), point.getColor(), 3, true, 0, event.getPartialTicks());
                     }
                     //everytime the player enters the range of the point, execute the command but only once
-                    if (BlockUtils.isPosInCylinder(new Vec3d(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos(), point.getRange(), 1){
+                    if (BlockUtils.isPosInCylinder(new Vec3d(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos(), point.getRange(), 1)){
                         if (!point.isExectued()) {
                             executeExtraStuffCmd(point);
                             point.setExectued(true);
