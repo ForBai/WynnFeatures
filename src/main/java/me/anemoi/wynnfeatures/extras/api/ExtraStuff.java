@@ -11,11 +11,13 @@ public class ExtraStuff {
     private Color color = new Color(255, 0, 0, 255);
     private float range = 1;
     private boolean onShift = false;
+    private boolean exectued = false;
 
     public ExtraStuff(String cmd, Vec3d pos) {
         this.cmd = cmd;
         this.pos = pos;
     }
+
     public ExtraStuff(String cmd, double x, double y, double z) {
         this.cmd = cmd;
         this.pos = new Vec3d(x, y, z);
@@ -65,6 +67,10 @@ public class ExtraStuff {
         return onShift;
     }
 
+    public boolean isExectued() {
+        return exectued;
+    }
+
     public void setPos(Vec3d pos) {
         this.pos = pos;
     }
@@ -89,6 +95,10 @@ public class ExtraStuff {
         this.onShift = onShift;
     }
 
+    public void setExectued(boolean exectued) {
+        this.exectued = exectued;
+    }
+
     @Override
     public String toString() {
         return "ExtraStuff{" +
@@ -98,6 +108,7 @@ public class ExtraStuff {
                 ", color=" + color +
                 ", range=" + range +
                 ", onShift=" + onShift +
+                ", exectued=" + exectued +
                 '}';
     }
 }

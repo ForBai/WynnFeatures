@@ -13,33 +13,24 @@ import static me.anemoi.wynnfeatures.WynnFeatures.mc;
 
 public class Utils {
 
+    public static boolean inWynncraft() {
+        return mc.getCurrentServerData() != null && mc.getCurrentServerData().serverIP.contains("wynncraft.com");
+    }
+
     public static void sendMessage(String string) {
-        if (mc.ingameGUI != null || mc.player == null) {
-            mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(ChatFormatting.AQUA + "[WF] " + ChatFormatting.RESET + string));
-        }
-    }
-
-    public static void sendMessage(Integer string) {
-        if (mc.ingameGUI != null || mc.player == null) {
-            mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(ChatFormatting.AQUA + "[WF] " + ChatFormatting.RESET + string));
-        }
-    }
-
-    public static void sendMessage(Double string) {
-        if (mc.ingameGUI != null || mc.player == null) {
-            mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(ChatFormatting.AQUA + "[WF] " + ChatFormatting.RESET + string));
-        }
+        if (mc.ingameGUI == null || mc.player == null) return;
+        mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(ChatFormatting.AQUA + "[WF] " + ChatFormatting.RESET + string));
     }
 
     public static void sendMessage(ITextComponent msg) {
-        if (mc.ingameGUI != null || mc.player == null) {
-            ITextComponent prefix = new TextComponentString(ChatFormatting.AQUA + "[WF] " + ChatFormatting.RESET);
-            mc.ingameGUI.addChatMessage(ChatType.CHAT,
-                    new TextComponentString("")
-                            .appendSibling(prefix)
-                            .appendSibling(msg)
-            );
-        }
+        if (mc.ingameGUI == null || mc.player == null) return;
+        ITextComponent prefix = new TextComponentString(ChatFormatting.AQUA + "[WF] " + ChatFormatting.RESET);
+        mc.ingameGUI.addChatMessage(ChatType.CHAT,
+                new TextComponentString("")
+                        .appendSibling(prefix)
+                        .appendSibling(msg)
+        );
+
     }
 
     public static String capitalizeString(String string) {

@@ -5,9 +5,9 @@ import me.anemoi.wynnfeatures.config.Config;
 import me.anemoi.wynnfeatures.config.ConfigScreen;
 import me.anemoi.wynnfeatures.events.MillisecondEvent;
 import me.anemoi.wynnfeatures.events.SecondEvent;
+import me.anemoi.wynnfeatures.extras.Extras;
 import me.anemoi.wynnfeatures.extras.ExtrasConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -45,7 +45,7 @@ public class WynnFeatures {
         if (!configDirectory.exists()) {
             configDirectory.mkdirs();
         }
-        ExtrasConfig.init(event.getModConfigurationDirectory(),"extras");
+        ExtrasConfig.init(event.getModConfigurationDirectory(), "extras");
 
     }
 
@@ -54,6 +54,7 @@ public class WynnFeatures {
         keybinds.add(new KeyBinding("Gui", Keyboard.KEY_RSHIFT, "WynnFeatures")); //0
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new Extras());
 
         for (KeyBinding keyBinding : keybinds) {
             ClientRegistry.registerKeyBinding(keyBinding);
@@ -73,8 +74,8 @@ public class WynnFeatures {
     }
 
     @SubscribeEvent
-    public void keyEvent(InputEvent.KeyInputEvent event){
-        if(keybinds.get(0).isPressed()){
+    public void keyEvent(InputEvent.KeyInputEvent event) {
+        if (keybinds.get(0).isPressed()) {
             GuiUtil.open(new ConfigScreen(true));
         }
     }

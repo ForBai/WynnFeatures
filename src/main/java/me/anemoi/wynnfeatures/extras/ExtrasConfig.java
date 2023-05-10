@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import me.anemoi.wynnfeatures.WynnFeatures;
-import me.anemoi.wynnfeatures.extras.api.ExtraBlock;
 import me.anemoi.wynnfeatures.extras.api.ExtraStuff;
 import me.anemoi.wynnfeatures.extras.api.ExtraWaypoint;
 import me.anemoi.wynnfeatures.utils.Utils;
@@ -18,42 +17,6 @@ import java.util.List;
 
 public class ExtrasConfig {
 
-    /*The config should look like following, WARNING this is just an example
-
-    {
-        "blocks": {
-            "minecraft:air": [
-                "0, 0, 0",
-                "1, 0, 0",
-                "0, 1, 0",
-                "0, 0, 1"
-            ],
-            "minecraft:stained_glass[color=white]": [
-                "2, 0, 0",
-                "0, 2, 0",
-                "0, 0, 2"
-            ]
-        },
-        "waypoints":{
-            "test": {
-                "pos": "0, 0, 0",
-                "visibleDistance": 10,
-                "color": "255, 255, 255"
-            }
-        },
-        "stuff":{
-            "0.1, 0.1, 0.1": {
-                "cmd": "say hi",
-                "visibleDistance": 10,
-                "color": "255, 255, 255",
-                "range": 10,
-                "onShift": true
-            }
-        }
-    }
-     */
-    //it should be a json file in the ./config/wynnfeatures/ folder with the name extras.json
-
     public static File extrasConfigFile;
 
     public static void init(File configDirectory, String name) {
@@ -64,29 +27,17 @@ public class ExtrasConfig {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Extras.addBlock(new ExtraBlock("minecraft:air", 1, 0, 0));
-        Extras.addBlock(new ExtraBlock("minecraft:air", 0, 1, 0));
-        Extras.addBlock(new ExtraBlock("minecraft:air", 0, 0, 1));
-        Extras.addBlock(new ExtraBlock("minecraft:stained_glass[color=white]", 2, 0, 0));
-        Extras.addBlock(new ExtraBlock("minecraft:stained_glass[color=white]", 0, 2, 0));
-        Extras.addBlock(new ExtraBlock("minecraft:stained_glass[color=white]", 0, 0, 2));
-        Extras.addWaypoint(new ExtraWaypoint("test", 0, 0, 0).withColor(new Color(255, 255, 255)).withVisibleDistance(10));
-        Extras.addStuff(new ExtraStuff("say hi", 0.1, 0.1, 0.1).withColor(new Color(255, 255, 0, 200)).withRange(2.4f).withOnShift(true).withVisibleDistance(10));
-        saveConfigs();
-        Extras.clearAll();
         loadConfigs();
-        Extras.blocks.forEach((k, v) -> System.out.println(k + " || " + v));
+        saveConfigs();
     }
 
     public static void saveConfigs() {
-        //save the config so it looks like the example above
         Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
         JsonObject jsonObject = new JsonObject();
         JsonObject blocks = new JsonObject();
         JsonObject waypoints = new JsonObject();
         JsonObject stuff = new JsonObject();
 
-        //blocks
         Extras.blocks.forEach((k, v) -> {
             JsonArray blockPos = new JsonArray();
             v.forEach(pos -> {
@@ -117,7 +68,6 @@ public class ExtrasConfig {
         jsonObject.add("stuff", stuff);
 
         String json = gson.toJson(jsonObject);
-        //write the json to the file
         Utils.writeToFile(extrasConfigFile, json);
     }
 
@@ -138,10 +88,6 @@ public class ExtrasConfig {
                 blockPosList.add(new BlockPos(Integer.parseInt(posArray[0]), Integer.parseInt(posArray[1]), Integer.parseInt(posArray[2])));
             });
             Extras.blocks.put(blockName, blockPosList);
-//            blockPos.forEach(pos -> {
-//                String[] posArray = pos.getAsString().split(", ");
-//                Extras.addBlock(new ExtraBlock(blockName, Integer.parseInt(posArray[0]), Integer.parseInt(posArray[1]), Integer.parseInt(posArray[2])));
-//            });
         });
 
         waypoints.entrySet().forEach(entry -> {

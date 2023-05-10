@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 public class BlockUtils {
     public static IBlockState getStateFromString(String blockStateString) {
@@ -75,6 +77,62 @@ public class BlockUtils {
             i++;
             propertyString.append(prop.getName()).append("=").append(blockStateProperties.get(prop)).append(i == blockStateProperties.keySet().size() ? "" : ",");
         }
-        return (propertyString.toString()).equals("") ? blockID : blockID +"[" + propertyString + "]";
+        return (propertyString.toString()).equals("") ? blockID : blockID + "[" + propertyString + "]";
+    }
+
+    public static boolean isPosInSphere(BlockPos pos, BlockPos center, int radius) {
+        return Math.sqrt(Math.pow(pos.getX() - center.getX(), 2) + Math.pow(pos.getY() - center.getY(), 2) + Math.pow(pos.getZ() - center.getZ(), 2)) <= radius;
+    }
+
+    public static boolean isPosInSphere(BlockPos pos, BlockPos center, float radius) {
+        return Math.sqrt(Math.pow(pos.getX() - center.getX(), 2) + Math.pow(pos.getY() - center.getY(), 2) + Math.pow(pos.getZ() - center.getZ(), 2)) <= radius;
+    }
+
+    public static boolean isPosInSphere(Vec3d pos, Vec3d center, int radius) {
+        return Math.sqrt(Math.pow(pos.x - center.x, 2) + Math.pow(pos.y - center.y, 2) + Math.pow(pos.z - center.z, 2)) <= radius;
+    }
+
+    public static boolean isPosInSphere(Vec3d pos, Vec3d center, float radius) {
+        return Math.sqrt(Math.pow(pos.x - center.x, 2) + Math.pow(pos.y - center.y, 2) + Math.pow(pos.z - center.z, 2)) <= radius;
+    }
+
+    public static boolean isPosInSphere(Vec3d pos, Vec3d center, double radius) {
+        return Math.sqrt(Math.pow(pos.x - center.x, 2) + Math.pow(pos.y - center.y, 2) + Math.pow(pos.z - center.z, 2)) <= radius;
+    }
+
+    public static boolean isPosInCube(BlockPos pos, BlockPos center, int radius) {
+        return Math.abs(pos.getX() - center.getX()) <= radius && Math.abs(pos.getY() - center.getY()) <= radius && Math.abs(pos.getZ() - center.getZ()) <= radius;
+    }
+
+    public static boolean isPosInCube(BlockPos pos, BlockPos center, float radius) {
+        return Math.abs(pos.getX() - center.getX()) <= radius && Math.abs(pos.getY() - center.getY()) <= radius && Math.abs(pos.getZ() - center.getZ()) <= radius;
+    }
+
+    public static boolean isPosInCube(Vec3d pos, Vec3d center, int radius) {
+        return Math.abs(pos.x - center.x) <= radius && Math.abs(pos.y - center.y) <= radius && Math.abs(pos.z - center.z) <= radius;
+    }
+
+    public static boolean isPosInCube(Vec3d pos, Vec3d center, float radius) {
+        return Math.abs(pos.x - center.x) <= radius && Math.abs(pos.y - center.y) <= radius && Math.abs(pos.z - center.z) <= radius;
+    }
+
+    public static boolean isPosInCube(Vec3d pos, Vec3d center, double radius) {
+        return Math.abs(pos.x - center.x) <= radius && Math.abs(pos.y - center.y) <= radius && Math.abs(pos.z - center.z) <= radius;
+    }
+
+    public static boolean isPosInCylinder(BlockPos pos, BlockPos center, int radius, int height) {
+        return Math.sqrt(Math.pow(pos.getX() - center.getX(), 2) + Math.pow(pos.getZ() - center.getZ(), 2)) <= radius && Math.abs(pos.getY() - center.getY()) <= height;
+    }
+
+    public static boolean isPosInCylinder(BlockPos pos, BlockPos center, float radius, float height) {
+        return Math.sqrt(Math.pow(pos.getX() - center.getX(), 2) + Math.pow(pos.getZ() - center.getZ(), 2)) <= radius && Math.abs(pos.getY() - center.getY()) <= height;
+    }
+
+    public static boolean isPosInCylinder(Vec3d pos, Vec3d center, int radius, int height) {
+        return Math.sqrt(Math.pow(pos.x - center.x, 2) + Math.pow(pos.z - center.z, 2)) <= radius && Math.abs(pos.y - center.y) <= height;
+    }
+
+    public static boolean isPosInCylinder(Vec3d pos, Vec3d center, float radius, float height) {
+        return Math.sqrt(Math.pow(pos.x - center.x, 2) + Math.pow(pos.z - center.z, 2)) <= radius && Math.abs(pos.y - center.y) <= height;
     }
 }

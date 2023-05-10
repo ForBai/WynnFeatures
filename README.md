@@ -10,3 +10,6 @@ Funny Wynn Craft Mod
 - [ ] Clip
 - [ ] Chest Stealer
 - [ ] Trade Market Sniper
+- [ ] Auto Scrap Button -> Scraps Common items
+- [ ] Chest Looter -> Loots custom set items from chests ctrl + shift + mclick
+- [ ] Inventory Search -> Press ctrl + f to search in Inventorys

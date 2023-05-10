@@ -11,6 +11,14 @@ import java.util.Comparator;
 public class Config extends Vigilant {
     public static Config INSTANCE = new Config();
 
+    @Property(type = PropertyType.SLIDER, name = "Test Font Scale", category = "General",min = 1,max = 300)
+    public int fontScale = 1;
+
+    @Property(type = PropertyType.SLIDER, name = "Test Font Size", category = "General",min = 1,max = 20)
+    public int pointScale1 = 15;
+    @Property(type = PropertyType.SLIDER, name = "Test Font Size2", category = "General",minF = 1,max = 20)
+    public int pointScale2 = 10;
+
     /***********
      *  EXTRAS *
      ***********/
@@ -42,6 +50,14 @@ public class Config extends Vigilant {
     @Property(type = PropertyType.SWITCH, name = "Mid Click Selector", description = "", category = "§1§rExtras", subcategory = "Extra Blocks")
     public boolean extraBlocksMidClickSelector = false;
 
+    @Property(type = PropertyType.SWITCH, name = "Show Name", description = "Shows the Name of the Waypoint",category = "§1§rExtras", subcategory = "Extra Waypoints")
+    public boolean extraWaypointsShowName = true;
+
+    @Property(type = PropertyType.SWITCH, name = "Show Cmd", description = "Shows the Cmd of the Cmd Stuff point",category = "§1§rExtras", subcategory = "Extra Stuff")
+    public boolean extraStuffShowCmd = true;
+
+    @Property(type = PropertyType.SWITCH, name = "Show Circle", description = "Shows a Circle instead of a Block Box",category = "§1§rExtras", subcategory = "Extra Stuff")
+    public boolean extraStuffShowCircle = true;
 
 
 

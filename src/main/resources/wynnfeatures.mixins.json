@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "wynnfeatures.mixins.refmap.json",
   "client": [
+    "IRenderManager",
     "MixinMinecraft"
   ],
   "minVersion": "0.8"
