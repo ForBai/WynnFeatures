@@ -1,7 +1,6 @@
 package me.anemoi.wynnfeatures.utils;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import gg.essential.elementa.font.data.Font;
 import me.anemoi.wynnfeatures.WynnFeatures;
 import me.anemoi.wynnfeatures.mixins.IRenderManager;
 import net.minecraft.block.state.IBlockState;

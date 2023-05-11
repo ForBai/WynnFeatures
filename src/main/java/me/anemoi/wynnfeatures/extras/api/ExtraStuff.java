@@ -7,7 +7,7 @@ import java.awt.*;
 public class ExtraStuff {
     private Vec3d pos;
     private String cmd;
-    private float visibleDistance = 32;
+    private float visibleDistance = 64;
     private Color color = new Color(255, 0, 0, 255);
     private float range = 1;
     private boolean onShift = false;

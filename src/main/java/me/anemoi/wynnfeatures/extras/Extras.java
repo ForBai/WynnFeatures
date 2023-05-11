@@ -8,9 +8,11 @@ import me.anemoi.wynnfeatures.extras.api.ExtraStuff;
 import me.anemoi.wynnfeatures.extras.api.ExtraWaypoint;
 import me.anemoi.wynnfeatures.utils.BlockUtils;
 import me.anemoi.wynnfeatures.utils.RenderUtils;
+import me.anemoi.wynnfeatures.utils.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -41,6 +43,20 @@ public class Extras {
         if (blocks.containsKey(BlockUtils.getStringFromState(block.getState()))) {
             blocks.get(BlockUtils.getStringFromState(block.getState())).remove(block.getPos());
         }
+    }
+
+    public static ExtraBlock getNearestBlock(int maxDistance) {
+        ExtraBlock nearest = null;
+        double distance = maxDistance;
+        for (List<BlockPos> list : blocks.values()) {
+            for (BlockPos pos : list) {
+                if (mc.player.getDistance(pos.getX(), pos.getY(), pos.getZ()) < distance) {
+                    distance = mc.player.getDistance(pos.getX(), pos.getY(), pos.getZ());
+                    nearest = new ExtraBlock(mc.world.getBlockState(pos), pos);
+                }
+            }
+        }
+        return nearest;
     }
 
     @SubscribeEvent
@@ -79,17 +95,19 @@ public class Extras {
                     if (WynnFeatures.config.extraStuffShowCmd) {
                         RenderUtils.renderWaypointTextEasy(point.getCmd(), point.getPos(), event.getPartialTicks());
                     }
-                    if (WynnFeatures.config.extraStuffShowCircle) {
+                    if (/*WynnFeatures.config.extraStuffShowCircle*/ point.getRange() != 1) {
                         RenderUtils.renderCircleLine(point.getPos().addVector(0, 0.001, 0), point.getRange(), point.getColor(), event.getPartialTicks(), 3);
                     } else {
                         RenderUtils.drawBlockOutline(new BlockPos(point.getPos().x, point.getPos().y, point.getPos().z), point.getColor(), 3, true, 0, event.getPartialTicks());
                     }
                     //everytime the player enters the range of the point, execute the command but only once
-                    if (BlockUtils.isPosInCylinder(new Vec3d(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos(), point.getRange(), 1)){
+                    if (BlockUtils.isPosInCylinder(new Vec3d(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos(), point.getRange(), 1)) {
                         if (!point.isExectued()) {
                             executeExtraStuffCmd(point);
                             point.setExectued(true);
                         }
+                    } else if (point.isExectued()) {
+                        point.setExectued(false);
                     }
 
                 }
@@ -99,7 +117,7 @@ public class Extras {
             waypoints.forEach(extraWaypoint -> {
                 if (BlockUtils.isPosInCube(extraWaypoint.getPos(), new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ), extraWaypoint.getVisibleDistance())) {
                     if (WynnFeatures.config.extraWaypointsShowName) {
-                        RenderUtils.renderWaypointTextEasy(extraWaypoint.getName(), new Vec3d(extraWaypoint.getPos()), event.getPartialTicks());
+                        RenderUtils.renderWaypointText(extraWaypoint.getName(), extraWaypoint.getPos().getX() + 0.5, extraWaypoint.getPos().getY() + 0.5, extraWaypoint.getPos().getZ() + 0.5, event.getPartialTicks());
                     }
                     RenderUtils.drawBlockOutline(extraWaypoint.getPos(), extraWaypoint.getColor(), 3, true, 0, event.getPartialTicks());
                 }
@@ -110,11 +128,14 @@ public class Extras {
     private void executeExtraStuffCmd(ExtraStuff extraStuff) {
         if (extraStuff.getCmd().startsWith("/")) {
             mc.player.sendChatMessage(extraStuff.getCmd());
+            Utils.sendMessage("Executed command: \"" + extraStuff.getCmd() + "\"" + " as chat message");
         } else {
             //send as client side command
-
+            ClientCommandHandler.instance.executeCommand(mc.player, "/" + extraStuff.getCmd());
+            Utils.sendMessage("Executed command: \"" + extraStuff.getCmd() + "\"" + " as client side command");
         }
     }
+
 
     private void renderBlocks() {
         if (mc.world == null || mc.player == null /*|| !Utils.inWynncraft()*/ || !WynnFeatures.config.extraBlocksToggled)

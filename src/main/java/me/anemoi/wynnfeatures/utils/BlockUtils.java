@@ -4,8 +4,14 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static me.anemoi.wynnfeatures.WynnFeatures.mc;
 
 public class BlockUtils {
     public static IBlockState getStateFromString(String blockStateString) {
@@ -135,4 +141,65 @@ public class BlockUtils {
     public static boolean isPosInCylinder(Vec3d pos, Vec3d center, float radius, float height) {
         return Math.sqrt(Math.pow(pos.x - center.x, 2) + Math.pow(pos.z - center.z, 2)) <= radius && Math.abs(pos.y - center.y) <= height;
     }
+
+    public static List<BlockPos> getBlocksInBox(BlockPos start, BlockPos end) {
+        List<BlockPos> blocks = new ArrayList<>();
+        for (int x = start.getX(); x <= end.getX(); x++) {
+            for (int y = start.getY(); y <= end.getY(); y++) {
+                for (int z = start.getZ(); z <= end.getZ(); z++) {
+                    blocks.add(new BlockPos(x, y, z));
+                }
+            }
+        }
+        return blocks;
+    }
+
+    public static List<BlockPos> getBlocksInAABB(AxisAlignedBB box) {
+        List<BlockPos> blocks = new ArrayList<>();
+        for (int x = (int) box.minX; x <= box.maxX; x++) {
+            for (int y = (int) box.minY; y <= box.maxY; y++) {
+                for (int z = (int) box.minZ; z <= box.maxZ; z++) {
+                    blocks.add(new BlockPos(x, y, z));
+                }
+            }
+        }
+        return blocks;
+    }
+
+    public static List<BlockPos> getBlocksInSphere(BlockPos center, int radius) {
+        List<BlockPos> blocks = new ArrayList<>();
+        for (int x = center.getX() - radius; x <= center.getX() + radius; x++) {
+            for (int y = center.getY() - radius; y <= center.getY() + radius; y++) {
+                for (int z = center.getZ() - radius; z <= center.getZ() + radius; z++) {
+                    if (isPosInSphere(new BlockPos(x, y, z), center, radius)) {
+                        blocks.add(new BlockPos(x, y, z));
+                    }
+                }
+            }
+        }
+        return blocks;
+    }
+
+    public static BlockPos parseBlockPos(String x, String y, String z) {
+        int xC;
+        int yC;
+        int zC;
+        if (x.startsWith("~")) {
+            xC = (int) mc.player.posX + Integer.parseInt(x.replace("~", ""));
+        } else {
+            xC = Integer.parseInt(x);
+        }
+        if (y.startsWith("~")) {
+            yC = (int) mc.player.posY + Integer.parseInt(y.replace("~", ""));
+        } else {
+            yC = Integer.parseInt(y);
+        }
+        if (z.startsWith("~")) {
+            zC = (int) mc.player.posZ + Integer.parseInt(z.replace("~", ""));
+        } else {
+            zC = Integer.parseInt(z);
+        }
+        return new BlockPos(xC, yC, zC);
+    }
+
 }

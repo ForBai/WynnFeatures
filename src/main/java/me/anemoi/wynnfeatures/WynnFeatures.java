@@ -1,5 +1,6 @@
 package me.anemoi.wynnfeatures;
 
+import gg.essential.api.EssentialAPI;
 import gg.essential.api.utils.GuiUtil;
 import me.anemoi.wynnfeatures.config.Config;
 import me.anemoi.wynnfeatures.config.ConfigScreen;
@@ -7,8 +8,10 @@ import me.anemoi.wynnfeatures.events.MillisecondEvent;
 import me.anemoi.wynnfeatures.events.SecondEvent;
 import me.anemoi.wynnfeatures.extras.Extras;
 import me.anemoi.wynnfeatures.extras.ExtrasConfig;
+import me.anemoi.wynnfeatures.extras.commands.AddStuffCommand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -55,6 +58,7 @@ public class WynnFeatures {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Extras());
+        ClientCommandHandler.instance.registerCommand(new AddStuffCommand());
 
         for (KeyBinding keyBinding : keybinds) {
             ClientRegistry.registerKeyBinding(keyBinding);
