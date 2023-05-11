@@ -14,6 +14,7 @@ public class ExtraWaypoint {
         this.name = name;
         this.pos = pos;
     }
+
     public ExtraWaypoint(String name, int x, int y, int z) {
         this.name = name;
         this.pos = new BlockPos(x, y, z);

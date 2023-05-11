@@ -28,7 +28,7 @@ public class AddStuffCommand extends CommandBase {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
         List<String> argsList = Arrays.asList(args);
         if (argsList.isEmpty()) {
             Utils.sendMessage("Please specify a cmd and possible arguments");

@@ -74,7 +74,6 @@ public class ExtraBlocksCommand extends CommandBase {
                     Extras.addBlock(new ExtraBlock(block, pos));
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
-                    return;
                 }
             } else if (argsList.get(1).startsWith("remove") || argsList.get(1).startsWith("none") || argsList.get(1).startsWith("r")) {
                 if (argsList.size() == 5) {
@@ -89,11 +88,9 @@ public class ExtraBlocksCommand extends CommandBase {
                     Extras.removeBlock(new ExtraBlock(block, pos));
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
-                    return;
                 }
             } else {
                 Utils.sendMessage("Please specify a valid block");
-                return;
             }
         } else if (argsList.get(0).equalsIgnoreCase("fill")) {
             //example would be /em fill minecraft:stained_glass[color=white] 0 0 0 2 2 2
@@ -111,7 +108,6 @@ public class ExtraBlocksCommand extends CommandBase {
                     posList.forEach(blockPos -> Extras.addBlock(new ExtraBlock(block, blockPos)));
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
-                    return;
                 }
             } else if (argsList.get(1).equalsIgnoreCase("remove") || argsList.get(1).equalsIgnoreCase("none") || argsList.get(1).equalsIgnoreCase("r")) {
                 if (argsList.size() == 5) {
@@ -126,11 +122,9 @@ public class ExtraBlocksCommand extends CommandBase {
                     Extras.removeBlock(new ExtraBlock(block, pos));
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
-                    return;
                 }
             } else {
                 Utils.sendMessage("Please specify a valid block");
-                return;
             }
         } else if (argsList.get(0).equalsIgnoreCase("replacenear")) {
             //example would be /em replacenear minecraft:air minecraft:stained_glass[color=white] 15
@@ -162,7 +156,6 @@ public class ExtraBlocksCommand extends CommandBase {
                     });
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
-                    return;
                 }
             } else if ((argsList.get(1).startsWith("remove") || argsList.get(1).equalsIgnoreCase("none") || argsList.get(1).equalsIgnoreCase("r")) && argsList.get(2).startsWith("minecraft:")) {
                 if (argsList.size() == 4) {
@@ -187,13 +180,11 @@ public class ExtraBlocksCommand extends CommandBase {
                     });
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
-                    return;
                 }
             } else {
                 Utils.sendMessage("Please specify a valid block");
-                return;
             }
-        } else if (argsList.get(0).equalsIgnoreCase("removenear")){
+        } else if (argsList.get(0).equalsIgnoreCase("removenear")) {
             //removes the nearest extra block you can also set an amount of blocks to remove
             if (argsList.size() == 1) {
                 Extras.removeBlock(Extras.getNearestBlock(32));
@@ -204,11 +195,9 @@ public class ExtraBlocksCommand extends CommandBase {
                 }
             } else {
                 Utils.sendMessage("Please give all the required arguments!");
-                return;
             }
-        }else {
+        } else {
             Utils.sendMessage("Please specify a valid command!");
-            return;
         }
     }
 }
