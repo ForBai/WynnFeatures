@@ -23,7 +23,10 @@ public class AddWaypointCommand extends CommandBase {
 
     @Override
     public String getUsage(ICommandSender sender) {
-        return "/" + getName() + " <waypoint>";
+        return "Usage: /addwaypoint <waypoint> [args]\n" +
+                "Available args: " +
+                "-visibleDistance=<distance> or -vDistance=<distance> (default: 32)\n" +
+                "-color=<color> (default: #ff0000ff) u can also enter it like this: -color=(255 0 0 255)\n";
     }
 
     @Override
@@ -65,7 +68,7 @@ public class AddWaypointCommand extends CommandBase {
                             Integer.valueOf(hex.substring(6, 8), 16)
                     );
                 } else if (arg.split("=")[1].startsWith("(") && arg.split("=")[1].endsWith(")")) {
-                    String[] colorArgs = arg.split("=")[1].replace("(", "").replace(")", "").split(" ");
+                    String[] colorArgs = arg.split("=")[1].replace("(", "").replace(")", "").split("x");
                     color = new Color(Integer.parseInt(colorArgs[0]), Integer.parseInt(colorArgs[1]), Integer.parseInt(colorArgs[2]), Integer.parseInt(colorArgs[3]));
                 } else {
                     Utils.sendMessage("Invalid color format");
@@ -75,6 +78,9 @@ public class AddWaypointCommand extends CommandBase {
             } else {
                 name.append(" ").append(arg);
             }
+        }
+        if (name.charAt(0) == ' ') {
+            name.deleteCharAt(0);
         }
         Extras.addWaypoint(new ExtraWaypoint(name.toString(), pos).withColor(color).withVisibleDistance(visibleDistance));
         ExtrasConfig.saveConfigs();

@@ -1,6 +1,7 @@
 package me.anemoi.wynnfeatures.extras.commands;
 
 import me.anemoi.wynnfeatures.extras.Extras;
+import me.anemoi.wynnfeatures.extras.ExtrasConfig;
 import me.anemoi.wynnfeatures.extras.api.ExtraBlock;
 import me.anemoi.wynnfeatures.utils.BlockUtils;
 import me.anemoi.wynnfeatures.utils.Utils;
@@ -25,22 +26,19 @@ public class ExtraBlocksCommand extends CommandBase {
 
     @Override
     public String getUsage(ICommandSender sender) {
-        //generate me a full usage message for the implemanted commands with a description(explanation)
-        StringBuilder usage = new StringBuilder();
-        usage.append("Usage: /extrablocks <cmd> <args>\n");
-        usage.append("Commands:\n");
-        usage.append("setBlock <block> <x> <y> <z> - sets a block at the given position\n");
-        usage.append("setBlock <block> - sets a block at the position of the player\n");
-        usage.append("fill <block> <x1> <y1> <z1> <x2> <y2> <z2> - fills the given area with the given block\n");
-        usage.append("fill <block> <x1> <y1> <z1> - fills the given area with the given block from the position of the player\n");
-        usage.append("fill remove/none/r <x1> <y1> <z1> <x2> <y2> <z2> - removes all the extra blocks in the given area\n");
-        usage.append("fill remove/none/r <x1> <y1> <z1> - removes all the extra blocks in the given area from the position of the player\n");
-        usage.append("replacenear <block> <block> <range> - replaces all the blocks in the given range with the given block from the position of the player\n");
-        usage.append("replacenear <block> <block> <x> <y> <z> <range> - replaces all the blocks in the given range with the given block from the given position\n");
-        usage.append("replacenear remove/none/r <block> <range> - removes all the extra blocks in the given range but only if they are the given block from the position of the player\n");
-        usage.append("replacenear remove/none/r <block> <x> <y> <z> <range> - removes all the extra blocks in the given range but only if they are the given block from the given position\n");
-        usage.append("removenear <amount> - removes the nearest <amount> extra blocks from the position of the player\n");
-        return "/" + getName() + " <stuff>";
+        return "Usage: /extrablocks <cmd> <args>\n" +
+                "Commands:\n" +
+                "setBlock <block> <x> <y> <z> - sets a block at the given position\n" +
+                "setBlock <block> - sets a block at the position of the player\n" +
+                "fill <block> <x1> <y1> <z1> <x2> <y2> <z2> - fills the given area with the given block\n" +
+                "fill <block> <x1> <y1> <z1> - fills the given area with the given block from the position of the player\n" +
+                "fill remove/none/r <x1> <y1> <z1> <x2> <y2> <z2> - removes all the extra blocks in the given area\n" +
+                "fill remove/none/r <x1> <y1> <z1> - removes all the extra blocks in the given area from the position of the player\n" +
+                "replacenear <block> <block> <range> - replaces all the blocks in the given range with the given block from the position of the player\n" +
+                "replacenear <block> <block> <x> <y> <z> <range> - replaces all the blocks in the given range with the given block from the given position\n" +
+                "replacenear remove/none/r <block> <range> - removes all the extra blocks in the given range but only if they are the given block from the position of the player\n" +
+                "replacenear remove/none/r <block> <x> <y> <z> <range> - removes all the extra blocks in the given range but only if they are the given block from the given position\n" +
+                "removenear <amount> - removes the nearest <amount> extra blocks from the position of the player\n";
     }
 
     @Override
@@ -56,7 +54,6 @@ public class ExtraBlocksCommand extends CommandBase {
             Utils.sendMessage("Not Implemented Yet");
             return;
         }
-
         if (argsList.get(0).equalsIgnoreCase("set") || argsList.get(0).equalsIgnoreCase("setBlock")) {
             //example would be /em setBlock minecraft:stained_glass[color=white] 0 0 0
             //or /em setBlock minecraft:stained_glass[color=white]
@@ -68,10 +65,12 @@ public class ExtraBlocksCommand extends CommandBase {
                     int y = Integer.parseInt(argsList.get(3));
                     int z = Integer.parseInt(argsList.get(4));
                     Extras.addBlock(new ExtraBlock(block, new BlockPos(x, y, z)));
+                    ExtrasConfig.saveConfigs();
                 } else if (argsList.size() == 2) {
                     IBlockState block = BlockUtils.getStateFromString(argsList.get(1));
                     BlockPos pos = new BlockPos(sender.getPositionVector());
                     Extras.addBlock(new ExtraBlock(block, pos));
+                    ExtrasConfig.saveConfigs();
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
                 }
@@ -82,10 +81,12 @@ public class ExtraBlocksCommand extends CommandBase {
                     int y = Integer.parseInt(argsList.get(3));
                     int z = Integer.parseInt(argsList.get(4));
                     Extras.removeBlock(new ExtraBlock(block, new BlockPos(x, y, z)));
+                    ExtrasConfig.saveConfigs();
                 } else if (argsList.size() == 2) {
                     IBlockState block = BlockUtils.getStateFromString(argsList.get(1));
                     BlockPos pos = new BlockPos(sender.getPositionVector());
                     Extras.removeBlock(new ExtraBlock(block, pos));
+                    ExtrasConfig.saveConfigs();
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
                 }
@@ -102,10 +103,12 @@ public class ExtraBlocksCommand extends CommandBase {
                     BlockPos pos = new BlockPos(sender.getPositionVector());
                     List<BlockPos> posList = BlockUtils.getBlocksInBox(pos, BlockUtils.parseBlockPos(argsList.get(2), argsList.get(3), argsList.get(4)));
                     posList.forEach(blockPos -> Extras.addBlock(new ExtraBlock(block, blockPos)));
+                    ExtrasConfig.saveConfigs();
                 } else if (argsList.size() == 8) {
                     IBlockState block = BlockUtils.getStateFromString(argsList.get(1));
                     List<BlockPos> posList = BlockUtils.getBlocksInBox(BlockUtils.parseBlockPos(argsList.get(2), argsList.get(3), argsList.get(4)), BlockUtils.parseBlockPos(argsList.get(5), argsList.get(6), argsList.get(7)));
                     posList.forEach(blockPos -> Extras.addBlock(new ExtraBlock(block, blockPos)));
+                    ExtrasConfig.saveConfigs();
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
                 }
@@ -116,10 +119,12 @@ public class ExtraBlocksCommand extends CommandBase {
                     int y = Integer.parseInt(argsList.get(3));
                     int z = Integer.parseInt(argsList.get(4));
                     Extras.removeBlock(new ExtraBlock(block, new BlockPos(x, y, z)));
+                    ExtrasConfig.saveConfigs();
                 } else if (argsList.size() == 2) {
                     IBlockState block = BlockUtils.getStateFromString(argsList.get(1));
                     BlockPos pos = new BlockPos(sender.getPositionVector());
                     Extras.removeBlock(new ExtraBlock(block, pos));
+                    ExtrasConfig.saveConfigs();
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
                 }
@@ -143,6 +148,7 @@ public class ExtraBlocksCommand extends CommandBase {
                             Extras.addBlock(new ExtraBlock(replaceBlock, blockPos));
                         }
                     });
+                    ExtrasConfig.saveConfigs();
                 } else if (argsList.size() == 7) {
                     IBlockState block = BlockUtils.getStateFromString(argsList.get(1));
                     IBlockState replaceBlock = BlockUtils.getStateFromString(argsList.get(2));
@@ -154,6 +160,7 @@ public class ExtraBlocksCommand extends CommandBase {
                             Extras.addBlock(new ExtraBlock(replaceBlock, blockPos));
                         }
                     });
+                    ExtrasConfig.saveConfigs();
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
                 }
@@ -168,6 +175,7 @@ public class ExtraBlocksCommand extends CommandBase {
                             Extras.removeBlock(new ExtraBlock(block, blockPos));
                         }
                     });
+                    ExtrasConfig.saveConfigs();
                 } else if (argsList.size() == 7) {
                     IBlockState block = BlockUtils.getStateFromString(argsList.get(2));
                     BlockPos pos = BlockUtils.parseBlockPos(argsList.get(3), argsList.get(4), argsList.get(5));
@@ -178,6 +186,7 @@ public class ExtraBlocksCommand extends CommandBase {
                             Extras.removeBlock(new ExtraBlock(block, blockPos));
                         }
                     });
+                    ExtrasConfig.saveConfigs();
                 } else {
                     Utils.sendMessage("Please give all the required arguments!");
                 }
@@ -188,16 +197,21 @@ public class ExtraBlocksCommand extends CommandBase {
             //removes the nearest extra block you can also set an amount of blocks to remove
             if (argsList.size() == 1) {
                 Extras.removeBlock(Extras.getNearestBlock(32));
+                ExtrasConfig.saveConfigs();
             } else if (argsList.size() == 2) {
                 int amount = Integer.parseInt(argsList.get(1));
                 for (int i = 0; i < amount; i++) {
                     Extras.removeBlock(Extras.getNearestBlock(32));
                 }
+                ExtrasConfig.saveConfigs();
             } else {
                 Utils.sendMessage("Please give all the required arguments!");
             }
+        } else if (argsList.get(0).equalsIgnoreCase("usage")) {
+            Utils.sendMessage(getUsage(sender));
         } else {
             Utils.sendMessage("Please specify a valid command!");
         }
+
     }
 }

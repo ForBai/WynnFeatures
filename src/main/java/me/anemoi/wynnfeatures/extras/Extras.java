@@ -16,6 +16,7 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +60,38 @@ public class Extras {
         return nearest;
     }
 
+    public static ExtraWaypoint getNearestWaypoint(int maxDistance) {
+        return getNearestWaypoint2(maxDistance).getLeft();
+    }
+
+    public static Pair<ExtraWaypoint, Double> getNearestWaypoint2(int maxDistance) {
+        ExtraWaypoint nearest = null;
+        double distance = maxDistance;
+        for (ExtraWaypoint point : waypoints) {
+            if (mc.player.getDistance(point.getPos().getX(), point.getPos().getY(), point.getPos().getZ()) < distance) {
+                distance = mc.player.getDistance(point.getPos().getX(), point.getPos().getY(), point.getPos().getZ());
+                nearest = point;
+            }
+        }
+        return Pair.of(nearest, distance);
+    }
+
+    public static ExtraStuff getNearestStuff(int maxDistance) {
+        return getNearestStuff2(maxDistance).getLeft();
+    }
+
+    public static Pair<ExtraStuff, Double> getNearestStuff2(int maxDistance) {
+        ExtraStuff nearest = null;
+        double distance = maxDistance;
+        for (ExtraStuff point : stuff) {
+            if (mc.player.getDistance(point.getPos().getX(), point.getPos().getY(), point.getPos().getZ()) < distance) {
+                distance = mc.player.getDistance(point.getPos().getX(), point.getPos().getY(), point.getPos().getZ());
+                nearest = point;
+            }
+        }
+        return Pair.of(nearest, distance);
+    }
+
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (WynnFeatures.config.extraBlocksRefreshType == 1) renderBlocks();
@@ -91,17 +124,17 @@ public class Extras {
 
         if (WynnFeatures.config.extraStuffToggled) {
             stuff.forEach(point -> {
-                if (BlockUtils.isPosInCube(point.getPos(), new Vec3d(mc.player.posX, mc.player.posY, mc.player.posZ), point.getVisibleDistance())) {
+                if (BlockUtils.isPosInCube(point.getPos(), new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ), point.getVisibleDistance())) {
                     if (WynnFeatures.config.extraStuffShowCmd) {
-                        RenderUtils.renderWaypointTextEasy(point.getCmd(), point.getPos(), event.getPartialTicks());
+                        RenderUtils.renderWaypointTextEasy(point.getCmd(), new Vec3d(point.getPos()).addVector(0.5, 0.5, 0.5), event.getPartialTicks());
                     }
                     if (/*WynnFeatures.config.extraStuffShowCircle*/ point.getRange() != 1) {
-                        RenderUtils.renderCircleLine(point.getPos().addVector(0, 0.001, 0), point.getRange(), point.getColor(), event.getPartialTicks(), 3);
+                        RenderUtils.renderCircleLine(new Vec3d(point.getPos()).addVector(0.5, 0.501, 0.5), point.getRange(), point.getColor(), event.getPartialTicks(), 3);
                     } else {
-                        RenderUtils.drawBlockOutline(new BlockPos(point.getPos().x, point.getPos().y, point.getPos().z), point.getColor(), 3, true, 0, event.getPartialTicks());
+                        RenderUtils.drawBlockOutline(point.getPos(), point.getColor(), 3, true, 0, event.getPartialTicks());
                     }
                     //everytime the player enters the range of the point, execute the command but only once
-                    if (BlockUtils.isPosInCylinder(new Vec3d(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos(), point.getRange(), 1)) {
+                    if (BlockUtils.isPosInCylinder(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos().add(0.5, 0, 0.5), point.getRange(), 1)) {
                         if (!point.isExectued()) {
                             executeExtraStuffCmd(point);
                             point.setExectued(true);

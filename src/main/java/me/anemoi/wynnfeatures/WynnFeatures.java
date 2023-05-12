@@ -10,6 +10,7 @@ import me.anemoi.wynnfeatures.extras.ExtrasConfig;
 import me.anemoi.wynnfeatures.extras.commands.AddStuffCommand;
 import me.anemoi.wynnfeatures.extras.commands.AddWaypointCommand;
 import me.anemoi.wynnfeatures.extras.commands.ExtraBlocksCommand;
+import me.anemoi.wynnfeatures.extras.commands.RemoveAnyCommand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -50,7 +51,6 @@ public class WynnFeatures {
             configDirectory.mkdirs();
         }
         ExtrasConfig.init(event.getModConfigurationDirectory(), "extras");
-
     }
 
     @EventHandler
@@ -62,6 +62,7 @@ public class WynnFeatures {
         ClientCommandHandler.instance.registerCommand(new AddStuffCommand());
         ClientCommandHandler.instance.registerCommand(new AddWaypointCommand());
         ClientCommandHandler.instance.registerCommand(new ExtraBlocksCommand());
+        ClientCommandHandler.instance.registerCommand(new RemoveAnyCommand());
 
         for (KeyBinding keyBinding : keybinds) {
             ClientRegistry.registerKeyBinding(keyBinding);

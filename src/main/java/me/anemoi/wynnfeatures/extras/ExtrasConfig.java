@@ -63,7 +63,7 @@ public class ExtrasConfig {
             stuffObject.addProperty("color", extraStuff.getColor().getRed() + ", " + extraStuff.getColor().getGreen() + ", " + extraStuff.getColor().getBlue());
             stuffObject.addProperty("range", extraStuff.getRange());
             stuffObject.addProperty("onShift", extraStuff.isOnShift());
-            stuff.add(extraStuff.getPos().x + ", " + extraStuff.getPos().y + ", " + extraStuff.getPos().z, stuffObject);
+            stuff.add(extraStuff.getPos().getX() + ", " + extraStuff.getPos().getY() + ", " + extraStuff.getPos().getZ(), stuffObject);
         });
         jsonObject.add("stuff", stuff);
 

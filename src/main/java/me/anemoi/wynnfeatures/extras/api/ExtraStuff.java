@@ -1,11 +1,12 @@
 package me.anemoi.wynnfeatures.extras.api;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 
 public class ExtraStuff {
-    private Vec3d pos;
+    private BlockPos pos;
     private String cmd;
     private float visibleDistance = 64;
     private Color color = new Color(255, 0, 0, 255);
@@ -13,14 +14,14 @@ public class ExtraStuff {
     private boolean onShift = false;
     private boolean exectued = false;
 
-    public ExtraStuff(String cmd, Vec3d pos) {
+    public ExtraStuff(String cmd, BlockPos pos) {
         this.cmd = cmd;
         this.pos = pos;
     }
 
     public ExtraStuff(String cmd, double x, double y, double z) {
         this.cmd = cmd;
-        this.pos = new Vec3d(x, y, z);
+        this.pos = new BlockPos(x, y, z);
     }
 
     public ExtraStuff withVisibleDistance(float visibleDistance) {
@@ -43,7 +44,7 @@ public class ExtraStuff {
         return this;
     }
 
-    public Vec3d getPos() {
+    public BlockPos getPos() {
         return pos;
     }
 
@@ -71,7 +72,7 @@ public class ExtraStuff {
         return exectued;
     }
 
-    public void setPos(Vec3d pos) {
+    public void setPos(BlockPos pos) {
         this.pos = pos;
     }
 

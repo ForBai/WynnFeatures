@@ -185,17 +185,17 @@ public class BlockUtils {
         int yC;
         int zC;
         if (x.startsWith("~")) {
-            xC = (int) mc.player.posX + Integer.parseInt(x.replace("~", ""));
+            xC = (int) mc.player.posX + (x.equals("~") ? 0 : Integer.parseInt(x.replace("~", "")));
         } else {
             xC = Integer.parseInt(x);
         }
         if (y.startsWith("~")) {
-            yC = (int) mc.player.posY + Integer.parseInt(y.replace("~", ""));
+            yC = (int) mc.player.posY + (y.equals("~") ? 0 : Integer.parseInt(y.replace("~", "")));
         } else {
             yC = Integer.parseInt(y);
         }
         if (z.startsWith("~")) {
-            zC = (int) mc.player.posZ + Integer.parseInt(z.replace("~", ""));
+            zC = (int) mc.player.posZ + (z.equals("~") ? 0 : Integer.parseInt(z.replace("~", "")));
         } else {
             zC = Integer.parseInt(z);
         }
