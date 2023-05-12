@@ -12,7 +12,6 @@ import gg.essential.elementa.constraints.PixelConstraint;
 import gg.essential.elementa.constraints.RelativeConstraint;
 import gg.essential.elementa.constraints.animation.AnimatingConstraints;
 import gg.essential.elementa.constraints.animation.Animations;
-import gg.essential.elementa.effects.Effect;
 import gg.essential.elementa.effects.OutlineEffect;
 import gg.essential.elementa.effects.RecursiveFadeEffect;
 import gg.essential.elementa.effects.ScissorEffect;
@@ -366,7 +365,7 @@ public class ConfigScreen extends WindowScreen {
                             //.setHeight(new RelativeConstraint(0.28f))
                             .setColor(featureBoxBackground)
                             .enableEffect(new OutlineEffect(featureBoxOutline, 1f))
-                            .setY(new PixelConstraint(yOffset+Margin));
+                            .setY(new PixelConstraint(yOffset + Margin));
 
                     UIComponent exampleFeature = new UIBlock().setChildOf(loadedFeaturesList).setColor(clear)
                             .setX(new CenterConstraint())

@@ -11,13 +11,8 @@ import java.util.Comparator;
 public class Config extends Vigilant {
     public static Config INSTANCE = new Config();
 
-    @Property(type = PropertyType.SLIDER, name = "Test Font Scale", category = "General",min = 1,max = 300)
-    public int fontScale = 1;
-
-    @Property(type = PropertyType.SLIDER, name = "Test Font Size", category = "General",min = 1,max = 20)
-    public int pointScale1 = 15;
-    @Property(type = PropertyType.SLIDER, name = "Test Font Size2", category = "General",minF = 1,max = 20)
-    public int pointScale2 = 10;
+    @Property(type = PropertyType.SWITCH, name = "Container Search", description = "Enabled/Disables the Container Search Function", category = "§1§rFeatures", subcategory = "General")
+    public boolean containerSearch = true;
 
     /***********
      *  EXTRAS *
@@ -41,24 +36,23 @@ public class Config extends Vigilant {
     "Refresh Type" selector {"Millisecond", "Tick","Tick+","Second"}
     "Mid Click Selector" switch
      */
-    @Property(type = PropertyType.SLIDER, name = "Show Block Range", description = "the range in which block are rendered", category = "§1§rExtras", subcategory = "Extra Blocks",min = 1, max = 255)
+    @Property(type = PropertyType.SLIDER, name = "Show Block Range", description = "the range in which block are rendered", category = "§1§rExtras", subcategory = "Extra Blocks", min = 1, max = 255)
     public int extraBlocksRange = 32;
     @Property(type = PropertyType.SELECTOR, name = "Range Mode", description = "", category = "§1§rExtras", subcategory = "Extra Blocks", options = {"Sphere", "Cube"})
     public int extraBlocksRangeMode = 0;
-    @Property(type = PropertyType.SELECTOR, name = "Refresh Type", description = "", category = "§1§rExtras", subcategory = "Extra Blocks", options = {"Millisecond", "Tick","Tick+","Second"})
+    @Property(type = PropertyType.SELECTOR, name = "Refresh Type", description = "", category = "§1§rExtras", subcategory = "Extra Blocks", options = {"Millisecond", "Tick", "Tick+", "Second"})
     public int extraBlocksRefreshType = 2;
     @Property(type = PropertyType.SWITCH, name = "Mid Click Selector", description = "", category = "§1§rExtras", subcategory = "Extra Blocks")
     public boolean extraBlocksMidClickSelector = false;
 
-    @Property(type = PropertyType.SWITCH, name = "Show Name", description = "Shows the Name of the Waypoint",category = "§1§rExtras", subcategory = "Extra Waypoints")
+    @Property(type = PropertyType.SWITCH, name = "Show Name", description = "Shows the Name of the Waypoint", category = "§1§rExtras", subcategory = "Extra Waypoints")
     public boolean extraWaypointsShowName = true;
 
-    @Property(type = PropertyType.SWITCH, name = "Show Cmd", description = "Shows the Cmd of the Cmd Stuff point",category = "§1§rExtras", subcategory = "Extra Stuff")
+    @Property(type = PropertyType.SWITCH, name = "Show Cmd", description = "Shows the Cmd of the Cmd Stuff point", category = "§1§rExtras", subcategory = "Extra Stuff")
     public boolean extraStuffShowCmd = true;
 
-    @Property(type = PropertyType.SWITCH, name = "Show Circle", description = "Shows a Circle instead of a Block Box",category = "§1§rExtras", subcategory = "Extra Stuff")
+    @Property(type = PropertyType.SWITCH, name = "Show Circle", description = "Shows a Circle instead of a Block Box", category = "§1§rExtras", subcategory = "Extra Stuff")
     public boolean extraStuffShowCircle = true;
-
 
 
     /**********

@@ -5,7 +5,6 @@ import me.anemoi.wynnfeatures.extras.ExtrasConfig;
 import me.anemoi.wynnfeatures.extras.api.ExtraWaypoint;
 import me.anemoi.wynnfeatures.utils.Utils;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;

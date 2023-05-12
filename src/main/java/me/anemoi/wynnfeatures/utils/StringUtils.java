@@ -1,12 +1,5 @@
 package me.anemoi.wynnfeatures.utils;
 
-import me.anemoi.wynnfeatures.WynnFeatures;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.lang.reflect.Array;
-import java.util.*;
 import java.util.regex.Pattern;
 
 public class StringUtils {

@@ -1,7 +1,6 @@
 package me.anemoi.wynnfeatures.extras.api;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 

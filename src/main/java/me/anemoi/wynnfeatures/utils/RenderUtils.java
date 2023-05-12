@@ -1203,4 +1203,8 @@ public class RenderUtils {
     }
 
 
+    public static Color withAlpha(Color color, int alpha) {
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha);
+    }
+
 }

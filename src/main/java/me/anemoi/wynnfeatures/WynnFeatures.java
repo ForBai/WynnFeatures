@@ -11,6 +11,7 @@ import me.anemoi.wynnfeatures.extras.commands.AddStuffCommand;
 import me.anemoi.wynnfeatures.extras.commands.AddWaypointCommand;
 import me.anemoi.wynnfeatures.extras.commands.ExtraBlocksCommand;
 import me.anemoi.wynnfeatures.extras.commands.RemoveAnyCommand;
+import me.anemoi.wynnfeatures.features.InventorySearch;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -59,6 +60,7 @@ public class WynnFeatures {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Extras());
+        MinecraftForge.EVENT_BUS.register(new InventorySearch());
         ClientCommandHandler.instance.registerCommand(new AddStuffCommand());
         ClientCommandHandler.instance.registerCommand(new AddWaypointCommand());
         ClientCommandHandler.instance.registerCommand(new ExtraBlocksCommand());
