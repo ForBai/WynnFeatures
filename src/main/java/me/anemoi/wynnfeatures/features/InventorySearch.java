@@ -25,7 +25,7 @@ public class InventorySearch {
 
     @SubscribeEvent
     public void onKey(GuiScreenEvent.KeyboardInputEvent.Pre event) {
-        if (mc.currentScreen instanceof GuiContainer || !WynnFeatures.config.containerSearch) return;
+        if (!(mc.currentScreen instanceof GuiContainer) || !WynnFeatures.config.containerSearch) return;
         if (!Keyboard.getEventKeyState()) return;
         if (Keyboard.isRepeatEvent()) return;
         int key = Keyboard.getEventKey();

@@ -5,6 +5,7 @@
   "refmap": "wynnfeatures.mixins.refmap.json",
   "client": [
     "IRenderManager",
+    "MixinGuiContainer",
     "MixinMinecraft"
   ],
   "minVersion": "0.8"
