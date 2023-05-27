@@ -11,7 +11,10 @@ import me.anemoi.wynnfeatures.extras.commands.AddStuffCommand;
 import me.anemoi.wynnfeatures.extras.commands.AddWaypointCommand;
 import me.anemoi.wynnfeatures.extras.commands.ExtraBlocksCommand;
 import me.anemoi.wynnfeatures.extras.commands.RemoveAnyCommand;
+import me.anemoi.wynnfeatures.features.AutoScrap;
 import me.anemoi.wynnfeatures.features.InventorySearch;
+import me.anemoi.wynnfeatures.features.TMCalc;
+import me.anemoi.wynnfeatures.utils.BlockUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -57,10 +60,11 @@ public class WynnFeatures {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         keybinds.add(new KeyBinding("Gui", Keyboard.KEY_RSHIFT, "WynnFeatures")); //0
-
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Extras());
         MinecraftForge.EVENT_BUS.register(new InventorySearch());
+        MinecraftForge.EVENT_BUS.register(new TMCalc());
+        MinecraftForge.EVENT_BUS.register(new AutoScrap());
         ClientCommandHandler.instance.registerCommand(new AddStuffCommand());
         ClientCommandHandler.instance.registerCommand(new AddWaypointCommand());
         ClientCommandHandler.instance.registerCommand(new ExtraBlocksCommand());

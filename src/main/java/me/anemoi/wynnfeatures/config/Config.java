@@ -2,17 +2,49 @@ package me.anemoi.wynnfeatures.config;
 
 import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.*;
+import me.anemoi.wynnfeatures.utils.BlockUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class Config extends Vigilant {
     public static Config INSTANCE = new Config();
 
+    @Property(type = PropertyType.SWITCH, name = "Show Barriers", description = "Replaces Barriers with a other Block", category = "§1§rFeatures", subcategory = "Barrier")
+    public boolean showBarriers = true;
+
+    @Property(type = PropertyType.SLIDER, name = "Barrier Range", description = "The Range in which Barriers will be replaced", category = "§1§rFeatures", subcategory = "Barrier", max = 100, min = 1)
+    public int barrierRange = 15;
+
+    //block type, could be Stone CobbleStone White Wool Diamond Block
+//    @Property(type = PropertyType.SELECTOR, name = "Replace Block", description = "The Block that will replace the Barriers", category = "§1§rFeatures", subcategory = "Barrier",options = Config.BLOCKS)
+    public String replaceBlock = "stone";
+
     @Property(type = PropertyType.SWITCH, name = "Container Search", description = "Enabled/Disables the Container Search Function", category = "§1§rFeatures", subcategory = "General")
     public boolean containerSearch = true;
+
+    @Property(type = PropertyType.SWITCH, name = "Trade Market Calculator", description = "Calculates the money you will get when everything is sold and some other Information", category = "§1§rFeatures", subcategory = "General")
+    public boolean tradeMarketCalculator = true;
+
+    /***********
+     *  SCRAP  *
+     ***********/
+
+    @Property(type = PropertyType.SWITCH, name = "Show Auto Scrap Button", description = "Shows a Button in the Blacksmith GUI to automatically scrap all items", category = "§1§rFeatures", subcategory = "Scrap")
+    public boolean autoScrapButton = true;
+
+    @Property(type = PropertyType.SWITCH, name = "Normal", description = "Enabled/Disables scraping Normal Items", category = "§1§rFeatures", subcategory = "Scrap")
+    public boolean normalScrap = true;
+
+    @Property(type = PropertyType.SWITCH, name = "Common", description = "Enabled/Disables scraping Common Items", category = "§1§rFeatures", subcategory = "Scrap")
+    public boolean commonScrap = true;
+
+    @Property(type = PropertyType.SLIDER, name = "Scrap Click Delay", description = "The Delay between each Scrap Click in ms", category = "§1§rFeatures", subcategory = "Scrap", max = 1000, min = 1)
+    public int scrapClickDelay = 100;
 
     /***********
      *  EXTRAS *

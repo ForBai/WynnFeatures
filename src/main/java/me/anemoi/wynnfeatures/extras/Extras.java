@@ -134,15 +134,13 @@ public class Extras {
                         RenderUtils.drawBlockOutline(point.getPos(), point.getColor(), 3, true, 0, event.getPartialTicks());
                     }
                     //everytime the player enters the range of the point, execute the command but only once
-                    if (BlockUtils.isPosInCylinder(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos().add(0.5, 0, 0.5), point.getRange(), 1)) {
-                        if (!point.isExectued()) {
-                            executeExtraStuffCmd(point);
-                            point.setExectued(true);
+                    if (point.isOnShift()) {
+                        if (mc.player.isSneaking()) {
+                            runCmd(point);
                         }
-                    } else if (point.isExectued()) {
-                        point.setExectued(false);
+                    } else {
+                        runCmd(point);
                     }
-
                 }
             });
         }
@@ -155,6 +153,17 @@ public class Extras {
                     RenderUtils.drawBlockOutline(extraWaypoint.getPos(), extraWaypoint.getColor(), 3, true, 0, event.getPartialTicks());
                 }
             });
+        }
+    }
+
+    private void runCmd(ExtraStuff point) {
+        if (BlockUtils.isPosInCylinder(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ), point.getPos().add(0.5, 0, 0.5), point.getRange(), 1)) {
+            if (!point.isExectued()) {
+                executeExtraStuffCmd(point);
+                point.setExectued(true);
+            }
+        } else if (point.isExectued()) {
+            point.setExectued(false);
         }
     }
 
