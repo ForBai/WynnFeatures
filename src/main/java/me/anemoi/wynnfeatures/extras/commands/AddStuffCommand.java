@@ -8,6 +8,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.server.permission.PermissionAPI;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -15,6 +16,11 @@ import java.util.List;
 
 
 public class AddStuffCommand extends CommandBase {
+
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
 
     @Override
     public String getName() {

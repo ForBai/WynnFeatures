@@ -13,6 +13,11 @@ import java.util.List;
 
 public class RemoveAnyCommand extends CommandBase {
     @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
+    @Override
     public String getName() {
         return "remove";
     }

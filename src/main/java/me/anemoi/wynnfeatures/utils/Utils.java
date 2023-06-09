@@ -8,6 +8,8 @@ import net.minecraft.util.text.TextComponentString;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.util.Objects;
+import java.util.UUID;
 
 import static me.anemoi.wynnfeatures.WynnFeatures.mc;
 
@@ -75,5 +77,30 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String getReadableNumber(double number, int decimals) {
+        if (number >= 1000000000) {
+            return String.format("%sB", Math.round(number / (1000000000 / Math.pow(10, decimals))) / Math.pow(10, decimals));
+        } else if (number >= 1000000) {
+            return String.format("%sM", Math.round(number / (1000000 / Math.pow(10, decimals))) / Math.pow(10, decimals));
+        } else if (number >= 1000) {
+            return String.format("%sK", Math.round(number / (1000 / Math.pow(10, decimals))) / Math.pow(10, decimals));
+        }
+
+        return String.valueOf((int) number);
+    }
+
+    public static String getCurrentWorld() {
+        try {
+            String name = Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(mc.getConnection()).getPlayerInfo(UUID.fromString("16ff7452-714f-3752-b3cd-c3cb2068f6af"))).getDisplayName()).getFormattedText();
+            return name.substring(name.indexOf("[") + 1, name.indexOf("]"));
+        } catch (NullPointerException | IndexOutOfBoundsException ignored) {
+            return null;
+        }
+    }
+
+    public static String getReadableTime(int minutes) {
+        return (minutes >= 1440.0 ? (int) Math.floor((minutes / 1440.0)) + "d " : "") + (int) (Math.floor((minutes % 1440) / 60.0)) + "h " + minutes % 60 + "m";
     }
 }

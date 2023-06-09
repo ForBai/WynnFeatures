@@ -33,6 +33,8 @@ loom {
 repositories {
     maven("https://repo.essential.gg/repository/maven-public/")
     maven("https://repo.spongepowered.org/repository/maven-public/")
+
+    maven("https://jitpack.io")
 }
 
 val embed by configurations.creating
@@ -43,6 +45,8 @@ dependencies {
     embed("gg.essential:loader-launchwrapper:1.1.3")
 
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
+    //okhttp
+    embed("com.squareup.okhttp3:okhttp:4.9.0")
 }
 
 tasks.compileKotlin {

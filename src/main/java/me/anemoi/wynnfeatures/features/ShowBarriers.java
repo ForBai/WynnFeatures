@@ -2,10 +2,9 @@ package me.anemoi.wynnfeatures.features;
 
 import me.anemoi.wynnfeatures.WynnFeatures;
 import me.anemoi.wynnfeatures.utils.BlockUtils;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.Arrays;
 
 import static me.anemoi.wynnfeatures.WynnFeatures.mc;
 
@@ -19,11 +18,13 @@ public class ShowBarriers {
     }
 
     private void renderBlocks() {
-        if (mc.world == null || mc.player == null /*|| !Utils.inWynncraft()*/ || !WynnFeatures.config.extraBlocksToggled)
+        if (mc.world == null || mc.player == null || !WynnFeatures.config.showBarriers)
             return;
-        //Arrays.asList(Blocks)
+        BlockUtils.getBlocksInSphere(mc.player.getPosition(), WynnFeatures.config.barrierRange).forEach(pos -> {
+            if (mc.world.getBlockState(pos).getBlock() == Blocks.BARRIER) {
+                mc.world.setBlockState(pos, BlockUtils.getStateFromString("minecraft:" + BlockUtils.BLOCKS[WynnFeatures.config.replaceBlock]));
+            }
+        });
     }
-
-
 
 }

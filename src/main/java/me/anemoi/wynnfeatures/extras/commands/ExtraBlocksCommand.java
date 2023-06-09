@@ -20,6 +20,11 @@ import static me.anemoi.wynnfeatures.WynnFeatures.mc;
 
 public class ExtraBlocksCommand extends CommandBase {
     @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
+    @Override
     public String getName() {
         return "extrablocks";
     }

@@ -15,6 +15,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class AddWaypointCommand extends CommandBase {
+
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
     @Override
     public String getName() {
         return "addwaypoint";
