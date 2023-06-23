@@ -29,6 +29,9 @@ public class Config extends Vigilant {
     @Property(type = PropertyType.SWITCH, name = "Show World Uptime on Tab", description = "Shows the World Uptime on the Tablist", category = "§1§rFeatures", subcategory = "General")
     public boolean showWorldUptimeOnTab = true;
 
+    @Property(type = PropertyType.SLIDER, name = "Fast Cast Click Delay",description = "The Delay between each Cast Click in ms", category = "§1§rFeatures", subcategory = "General", max = 1000, min = 1)
+    public int fastCastClickDelay = 90;
+
     /***********
      *  SCRAP  *
      ***********/

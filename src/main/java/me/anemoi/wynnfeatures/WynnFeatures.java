@@ -58,6 +58,10 @@ public class WynnFeatures {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         keybinds.add(new KeyBinding("Gui", Keyboard.KEY_RSHIFT, "WynnFeatures")); //0
+        keybinds.add(new KeyBinding("RRR", Keyboard.KEY_NONE, "WynnFeatures")); //1
+        keybinds.add(new KeyBinding("RLR", Keyboard.KEY_NONE, "WynnFeatures")); //2
+        keybinds.add(new KeyBinding("RLL", Keyboard.KEY_NONE, "WynnFeatures")); //3
+        keybinds.add(new KeyBinding("RRL", Keyboard.KEY_NONE, "WynnFeatures")); //4
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Extras());
         MinecraftForge.EVENT_BUS.register(new InventorySearch());
@@ -65,6 +69,7 @@ public class WynnFeatures {
         MinecraftForge.EVENT_BUS.register(new AutoScrap());
         MinecraftForge.EVENT_BUS.register(new ShowBarriers());
         MinecraftForge.EVENT_BUS.register(new UpTime());
+        MinecraftForge.EVENT_BUS.register(new FastCast());
 
         ClientCommandHandler.instance.registerCommand(new AddStuffCommand());
         ClientCommandHandler.instance.registerCommand(new AddWaypointCommand());
