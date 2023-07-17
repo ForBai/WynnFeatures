@@ -8,7 +8,7 @@ Funny Wynn Craft Mod
 - [x] Inventory Search -> Press ctrl + f to search in Inventorys
 - [x] Trade Market Calculator -> calculates how much money you will get when everything sells
 - [ ] Auto Scrap Button -> Scraps Common items | WIP
-- [ ] Show Barriers -> show barriers in a specifc range
+- [x] Show Barriers -> show barriers in a specifc range
 - [ ] Trade Market Sniper -> Looks for underpriced items in the trade market and buys them
 - [ ] Fast Phase
 - [ ] Chest Looter -> Loots custom set items from chests ctrl + shift + mclick
