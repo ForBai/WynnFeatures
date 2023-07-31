@@ -31,7 +31,7 @@ public class AutoScrap {
     }
 
     @SubscribeEvent
-    public void onInitGui(GuiScreenEvent.ActionPerformedEvent event) {
+    public void onActionPerform(GuiScreenEvent.ActionPerformedEvent event) {
         if (!WynnFeatures.config.autoScrapButton) return;
         if (!(event.getGui() instanceof GuiChest)) return;
         GuiChest chest = (GuiChest) event.getGui();

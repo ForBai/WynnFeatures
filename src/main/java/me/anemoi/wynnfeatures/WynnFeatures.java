@@ -12,7 +12,7 @@ import me.anemoi.wynnfeatures.extras.commands.AddWaypointCommand;
 import me.anemoi.wynnfeatures.extras.commands.ExtraBlocksCommand;
 import me.anemoi.wynnfeatures.extras.commands.RemoveAnyCommand;
 import me.anemoi.wynnfeatures.features.*;
-import me.anemoi.wynnfeatures.utils.BlockUtils;
+import me.anemoi.wynnfeatures.features.tmsniper.TMLog;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -70,6 +70,7 @@ public class WynnFeatures {
         MinecraftForge.EVENT_BUS.register(new ShowBarriers());
         MinecraftForge.EVENT_BUS.register(new UpTime());
         MinecraftForge.EVENT_BUS.register(new FastCast());
+        MinecraftForge.EVENT_BUS.register(new TMLog());
 
         ClientCommandHandler.instance.registerCommand(new AddStuffCommand());
         ClientCommandHandler.instance.registerCommand(new AddWaypointCommand());
