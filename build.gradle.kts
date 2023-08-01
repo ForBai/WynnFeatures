@@ -62,19 +62,19 @@ dependencies {
     //slf4j
     embed("org.slf4j:slf4j-api:1.6.1")
 
-    embed(files("../../libs/polyui-nanovg-impl-0.20.0.jar"))
+//    embed(files("../../libs/polyui-nanovg-impl-0.20.0.jar"))
     embed(files("../../libs/polyui-0.20.0.jar"))
 
 
-//    // Add LWJGL modules' native bindings to the test runtime
-//    val nativePlatforms = listOf("windows", "linux", "macos", "macos-arm64")
-//    val modules = listOf(/*"lwjgl",*/ "lwjgl-nanovg", "lwjgl-opengl", "lwjgl-glfw", "lwjgl-stb")
-//    modules.forEach { module ->
-//        nativePlatforms.forEach { platform ->
-//            embed("org.lwjgl:$module:3.3.2:natives-$platform")
-//            compileOnly("org.lwjgl:$module:3.3.2")
-//        }
-//    }
+    // Add LWJGL modules' native bindings to the test runtime
+    val nativePlatforms = listOf("windows", "linux", "macos", "macos-arm64")
+    val modules = listOf("lwjgl", "lwjgl-nanovg", "lwjgl-opengl", "lwjgl-glfw", "lwjgl-stb")
+    modules.forEach { module ->
+        nativePlatforms.forEach { platform ->
+            compileOnly("org.lwjgl:$module:3.3.2:natives-$platform")
+            compileOnly("org.lwjgl:$module:3.3.2")
+        }
+    }
 }
 
 tasks.compileKotlin {
