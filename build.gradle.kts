@@ -46,7 +46,6 @@ repositories {
 //    maven("https://raw.githubusercontent.com/kotlin-graphics/mary/master")
     maven("https://jitpack.io")
     maven("https://repo.polyfrost.cc/releases/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 val embed by configurations.creating
@@ -62,19 +61,7 @@ dependencies {
     //slf4j
     embed("org.slf4j:slf4j-api:1.6.1")
 
-//    embed(files("../../libs/polyui-nanovg-impl-0.20.0.jar"))
-    embed(files("../../libs/polyui-0.20.0.jar"))
 
-
-    // Add LWJGL modules' native bindings to the test runtime
-    val nativePlatforms = listOf("windows", "linux", "macos", "macos-arm64")
-    val modules = listOf("lwjgl", "lwjgl-nanovg", "lwjgl-opengl", "lwjgl-glfw", "lwjgl-stb")
-    modules.forEach { module ->
-        nativePlatforms.forEach { platform ->
-            compileOnly("org.lwjgl:$module:3.3.2:natives-$platform")
-            compileOnly("org.lwjgl:$module:3.3.2")
-        }
-    }
 }
 
 tasks.compileKotlin {
@@ -105,3 +92,25 @@ tasks.jar {
         )
     )
 }
+
+
+
+/*
+//    embed(files("../../libs/polyui-nanovg-impl-0.23.0.jar"))
+//    embed(files("../../libs/polyui-0.23.0.jar"))
+
+    embed("io.github.spair:imgui-java-app:1.86.10") /*{
+        exclude("org.lwjgl", "lwjgl")
+    }*/
+//    embed("io.github.spair:imgui-java-lwjgl3:1.86.10")
+    embed("io.github.spair:imgui-java-binding:1.86.10")
+    arrayOf("windows", "linux", "macos").forEach {
+        embed("io.github.spair:imgui-java-natives-$it:1.86.10")
+//        runtimeOnly("org.lwjgl:lwjgl:3.2.3:natives-$it")
+//        embed(files("../../libs/lwjgl-natives-$it.jar"))
+    }
+    arrayOf("", "-opengl", "-glfw").forEach {
+        runtimeOnly("org.lwjgl:lwjgl$it:3.3.1")
+//        embed("org.lwjgl:lwjgl$it::natives-linux")
+    }
+ */

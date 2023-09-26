@@ -13,6 +13,7 @@ import me.anemoi.wynnfeatures.extras.commands.ExtraBlocksCommand;
 import me.anemoi.wynnfeatures.extras.commands.RemoveAnyCommand;
 import me.anemoi.wynnfeatures.features.*;
 import me.anemoi.wynnfeatures.features.tmsniper.TMLog;
+import me.anemoi.wynnfeatures.imgui.Renderable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -31,6 +32,7 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -45,6 +47,8 @@ public class WynnFeatures {
     public static final Minecraft mc = Minecraft.getMinecraft();
 
     public static File configDirectory;
+
+    public static ArrayList<Renderable> renderstack = new ArrayList<>();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -102,5 +106,7 @@ public class WynnFeatures {
             GuiUtil.open(new ConfigScreen(true));
         }
     }
+
+
 }
 

@@ -37,7 +37,6 @@ public class TMLog {
         if (inventory.getDisplayName().getFormattedText().toLowerCase(Locale.ROOT).contains("trade market")) {
             System.out.println("Trade Market Opened");
             //TODO: External gui
-            TMLogGui.main();
             System.out.println("Opened Custom Log Gui");
         }
     }
